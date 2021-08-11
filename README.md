@@ -64,3 +64,18 @@ We also need to [update `.gitignore`](https://yarnpkg.com/getting-started/qa#whi
 Note that we could use [gitignore.io](https://gitignore.io) to update `.gitignore` for both Node and Yarn, but the generated Node part is extremely bloated, and the Yarn part will likely require some manual tuning, so it's better to configure them manually.
 
 We also need to tell WebStorm to use Yarn as the package manager at **File | Settings | Languages & Frameworks | Node.js and NPM**.
+
+### Node package initialization
+
+We want this project to be a monorepo, because we will likely want to put backend and frontend packages here.
+
+Let's init this package as a workspace root:
+
+```
+yarn init -w
+```
+
+We also add the [`description`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#description-1), [`repository`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#repository), [`license`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#license), and [`author`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#people-fields-author-contributors) fields, because they seem important even for a private package.
+
+We use the [MIT](https://opensource.org/licenses/MIT) license, because it's the default option for open-source software. We also add the `LICENSE` file.
+
