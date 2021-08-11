@@ -6,6 +6,7 @@ React project boilerplate with step-by-step creation history.
 
 -   VCS: Git.
 -   Supported operating systems: macOS, Windows, and Linux.
+-   IDE: WebStorm.
 
 ## History
 
@@ -34,3 +35,9 @@ As a bonus, the empty initial commit will save us some headache in case of [reba
 ### .gitignore initialization
 
 Now is a good time to create the `.gitignore` file. We don't have any code yet, but we can already ignore the OS-specific files. The easiest way to do so is to use [gitignore.io](https://gitignore.io). We want the project to work on macOS, Windows, and Linux.
+
+### IDE initialization
+
+The next logical step is to set up the IDE. We will use [WebStorm](https://www.jetbrains.com/webstorm/) (2021.2 at the time of writing).
+
+For now, we will rely on the automatically created `.idea/.gitignore`, and we will consult [the official support page](https://intellij-support.jetbrains.com/hc/en-us/articles/206544839-How-to-manage-projects-under-Version-Control-Systems) before adding any IDE files to VCS.
