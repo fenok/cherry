@@ -5,6 +5,7 @@ React project boilerplate with step-by-step creation history.
 ## Tech stack
 
 -   VCS: Git.
+-   Supported operating systems: macOS, Windows, and Linux.
 
 ## History
 
@@ -29,3 +30,7 @@ The `dev` branch is where we will implement features before releasing them.
 This branching model resembles [git-flow](https://nvie.com/posts/a-successful-git-branching-model/). We don't use [GitHub flow](https://guides.github.com/introduction/flow/), because we want to be able to implement multiple features before releasing them all at once.
 
 As a bonus, the empty initial commit will save us some headache in case of [rebasing](https://stackoverflow.com/questions/22992543/how-do-i-git-rebase-the-first-commit).
+
+### .gitignore initialization
+
+Now is a good time to create the `.gitignore` file. We don't have any code yet, but we can already ignore the OS-specific files. The easiest way to do so is to use [gitignore.io](https://gitignore.io). We want the project to work on macOS, Windows, and Linux.
