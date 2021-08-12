@@ -11,6 +11,7 @@ React project boilerplate with step-by-step creation history.
 -   Code Style: Prettier.
 -   Local git hooks: Husky.
 -   Commit message linting: commitlint.
+-   Running scripts for staged files: lint-staged.
 
 ## History
 
@@ -183,4 +184,26 @@ Finally, we need to add the git hook:
 
 ```bash
 yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
+```
+
+### Formatting files before commit
+
+We want to ensure that files are formatted before commit. The easiest way to achieve this is to use [lint-staged](https://github.com/okonet/lint-staged):
+
+```
+yarn add -D lint-staged
+```
+
+We configure lint-staged to [run prettier on any staged file](https://github.com/okonet/lint-staged#automatically-fix-code-style-with-prettier-for-any-format-prettier-supports) (`lint-staged.config.js`):
+
+```
+module.exports = {
+    "*": "prettier --ignore-unknown --write"
+}
+```
+
+Finally, we need to add the git hook:
+
+```bash
+yarn husky add .husky/pre-commit "yarn lint-staged"
 ```
