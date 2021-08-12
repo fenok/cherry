@@ -221,3 +221,37 @@ yarn install
 ```
 
 We also add the [`description`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#description-1), [`repository`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#repository), [`license`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#license), and [`author`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#people-fields-author-contributors) fields (as in the root package).
+
+### Enabling prettier for frontend package
+
+We add Prettier to the `frontend` package.
+
+```bash
+yarn add -D prettier
+```
+
+We also create the `format` yarn script (it's the same as the root one).
+
+Frontend Prettier will reuse the root config, and we don't have anything to ignore (yet).
+
+We also need to teach the root package to run `format` in all workspaces. We will use [yarn workspaces foreach](https://yarnpkg.com/cli/workspaces/foreach) for that:
+
+```bash
+yarn plugin import workspace-tools
+```
+
+It seems more convenient to create a generic `foreach` script in the root package for running scripts in all workspaces in parallel:
+
+```json
+{
+    "scripts": {
+        "foreach": "yarn workspaces foreach -p run"
+    }
+}
+```
+
+Now we can run `format` in all workspaces (including the root one) like this:
+
+```bash
+yarn foreach format
+```

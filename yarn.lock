@@ -643,6 +643,8 @@ __metadata:
 "frontend@workspace:packages/frontend":
   version: 0.0.0-use.local
   resolution: "frontend@workspace:packages/frontend"
+  dependencies:
+    prettier: ^2.3.2
   languageName: unknown
   linkType: soft
 

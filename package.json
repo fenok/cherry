@@ -13,6 +13,7 @@
         "packages/*"
     ],
     "scripts": {
+        "foreach": "yarn workspaces foreach -p run",
         "format": "prettier --write --ignore-unknown .",
         "postinstall": "husky install"
     },
