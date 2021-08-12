@@ -8,6 +8,7 @@ React project boilerplate with step-by-step creation history.
 -   Supported operating systems: macOS, Windows, and Linux.
 -   IDE: WebStorm.
 -   Node package manager: Yarn 2 (even 3, actually).
+-   Code Style: Prettier.
 
 ## History
 
@@ -79,3 +80,51 @@ We also add the [`description`](https://docs.npmjs.com/cli/v7/configuring-npm/pa
 
 We use the [MIT](https://opensource.org/licenses/MIT) license, because it's the default option for open-source software. We also add the `LICENSE` file.
 
+### Adding prettier
+
+We add [`prettier`](https://prettier.io/) as a dev dependency:
+
+```
+yarn add -D prettier
+```
+
+Then we add `format` yarn script:
+
+```
+"scripts": {
+    "format": "prettier --write --ignore-unknown ."
+},
+```
+
+The `--write` option enables formatting in-place, and `--ignore-unknown` in conjunction with the `.` pattern means that
+we will format _any_ file wich `prettier` is capable to format.
+
+Now we just need to ignore the files that we don't want to be formatted, so we create the `.prettierignore` file:
+
+```
+.idea/
+.yarn/
+.pnp.*
+.yarnrc.yml
+packages/
+```
+
+We don't want to touch the IDE files (`.idea/`), yarn files (`.yarn/`, `.pnp.*`, `.yarnrc.yml`), and packages (because
+they will have their own formatting scripts).
+
+We also tweak `prettier` via the `.prettierrc` file.
+
+```
+{
+    "tabWidth": 4,
+    "printWidth": 120
+}
+```
+
+And we delete the `.editorconfig` file, because `prettier` completely overrides it.
+
+> There is a [bug](https://youtrack.jetbrains.com/issue/WEB-51899) in WebStorm 2021.2 that prevents running `prettier` on save, so we roll back to the previous WebStorm version.
+
+We also need to configure WebStorm. At **File | Settings | Languages & Frameworks | Javascript | Prettier**, we enable the "On save" option and specify the following glob pattern: `{**/*,*}.*`.
+
+We also use the `prettier` code style (enabled via the popup at the `.prettierrc` file).

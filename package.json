@@ -1,15 +1,21 @@
 {
-  "name": "cherry",
-  "description": "React project boilerplate with step-by-step creation history.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fenok/cherry.git"
-  },
-  "license": "MIT",
-  "author": "Leonid Fenko <fenok2112@gmail.com>",
-  "packageManager": "yarn@3.0.0",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ]
+    "name": "cherry",
+    "description": "React project boilerplate with step-by-step creation history.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fenok/cherry.git"
+    },
+    "license": "MIT",
+    "author": "Leonid Fenko <fenok2112@gmail.com>",
+    "packageManager": "yarn@3.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "format": "prettier --write --ignore-unknown ."
+    },
+    "devDependencies": {
+        "prettier": "^2.3.2"
+    }
 }
