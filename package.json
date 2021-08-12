@@ -15,6 +15,7 @@
     "scripts": {
         "foreach": "yarn workspaces foreach -p run",
         "format": "prettier --write --ignore-unknown .",
+        "pre-commit": "lint-staged",
         "postinstall": "husky install"
     },
     "devDependencies": {

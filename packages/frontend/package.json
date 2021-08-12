@@ -10,9 +10,11 @@
     "packageManager": "yarn@3.0.0",
     "private": true,
     "scripts": {
-        "format": "prettier --write --ignore-unknown ."
+        "format": "prettier --write --ignore-unknown .",
+        "pre-commit": "lint-staged"
     },
     "devDependencies": {
+        "lint-staged": "^11.1.2",
         "prettier": "^2.3.2"
     }
 }

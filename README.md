@@ -255,3 +255,33 @@ Now we can run `format` in all workspaces (including the root one) like this:
 ```bash
 yarn foreach format
 ```
+
+### Formatting frontend files before commit
+
+Right now `lint-staged` only works for the root package. Let's fix that.
+
+We need to add `lint-staged` to `frontend`:
+
+```bash
+yarn add -D lint-staged
+```
+
+We also need to add `lint-staged.config.js` to `frontend`. For now, it's just a copy of the root config.
+
+Then, we need to add the `pre-commit` script to every `package.json`:
+
+```json
+{
+    "scripts": {
+        "pre-commit": "lint-staged"
+    }
+}
+```
+
+Finally, we need to update the git hook:
+
+```bash
+yarn husky add .husky/pre-commit "yarn workspaces foreach -p run pre-commit"
+```
+
+This way, before commit, all `pre-commit` scripts will be called in parallel.

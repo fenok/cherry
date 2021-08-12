@@ -772,6 +772,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/frontend/",
           "packageDependencies": [
             ["frontend", "workspace:packages/frontend"],
+            ["lint-staged", "npm:11.1.2"],
             ["prettier", "npm:2.3.2"]
           ],
           "linkType": "SOFT",
