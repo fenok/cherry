@@ -21,12 +21,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {
         "name": "cherry",
         "reference": "workspace:."
+      },
+      {
+        "name": "frontend",
+        "reference": "workspace:packages/frontend"
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["cherry", ["workspace:."]]
+      ["cherry", ["workspace:."]],
+      ["frontend", ["workspace:packages/frontend"]]
     ],
     "fallbackPool": [
     ],
@@ -760,6 +765,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["path-exists", "npm:4.0.0"]
           ],
           "linkType": "HARD",
+        }]
+      ]],
+      ["frontend", [
+        ["workspace:packages/frontend", {
+          "packageLocation": "./packages/frontend/",
+          "packageDependencies": [
+            ["frontend", "workspace:packages/frontend"]
+          ],
+          "linkType": "SOFT",
         }]
       ]],
       ["fs-extra", [

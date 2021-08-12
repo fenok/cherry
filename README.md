@@ -207,3 +207,17 @@ Finally, we need to add the git hook:
 ```bash
 yarn husky add .husky/pre-commit "yarn lint-staged"
 ```
+
+### Creating frontend package
+
+We initialize private `frontend` package, because we have no intentions to publish it. We also need to update the lockfile after that.
+
+```bash
+cd packages
+mkdir frontend
+cd frontend
+yarn init -p
+yarn install
+```
+
+We also add the [`description`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#description-1), [`repository`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#repository), [`license`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#license), and [`author`](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#people-fields-author-contributors) fields (as in the root package).
