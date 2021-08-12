@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["husky", "npm:7.0.1"],
             ["prettier", "npm:2.3.2"]
           ],
           "linkType": "SOFT",
@@ -45,9 +46,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["cherry", "workspace:."],
+            ["husky", "npm:7.0.1"],
             ["prettier", "npm:2.3.2"]
           ],
           "linkType": "SOFT",
+        }]
+      ]],
+      ["husky", [
+        ["npm:7.0.1", {
+          "packageLocation": "./.yarn/cache/husky-npm-7.0.1-b59747cd86-b2ea1460f1.zip/node_modules/husky/",
+          "packageDependencies": [
+            ["husky", "npm:7.0.1"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["prettier", [

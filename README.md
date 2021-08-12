@@ -9,6 +9,7 @@ React project boilerplate with step-by-step creation history.
 -   IDE: WebStorm.
 -   Node package manager: Yarn 2 (even 3, actually).
 -   Code Style: Prettier.
+-   Local git hooks: Husky.
 
 ## History
 
@@ -128,3 +129,24 @@ And we delete the `.editorconfig` file, because `prettier` completely overrides 
 We also need to configure WebStorm. At **File | Settings | Languages & Frameworks | Javascript | Prettier**, we enable the "On save" option and specify the following glob pattern: `{**/*,*}.*`.
 
 We also use the `prettier` code style (enabled via the popup at the `.prettierrc` file).
+
+### Adding Husky
+
+We want to use local git hooks, so we [install Husky](https://typicode.github.io/husky/#/?id=yarn-2). Note that we're not going to publish any packages, so we don't need the `pinst` hack.
+
+```
+yarn add husky --dev
+yarn husky install
+```
+
+We also add a `postinstall` script to automatically enable git hooks after install:
+
+```json
+{
+    "scripts": {
+        "postinstall": "husky install"
+    }
+}
+```
+
+And, just to be safe, we add the `.husky` directory to `.prettierignore`.

@@ -13,9 +13,11 @@
         "packages/*"
     ],
     "scripts": {
-        "format": "prettier --write --ignore-unknown ."
+        "format": "prettier --write --ignore-unknown .",
+        "postinstall": "husky install"
     },
     "devDependencies": {
+        "husky": "^7.0.1",
         "prettier": "^2.3.2"
     }
 }

@@ -1,4 +1,5 @@
 .idea/
+.husky/
 .yarn/
 .pnp.*
 .yarnrc.yml
