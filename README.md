@@ -10,6 +10,7 @@ React project boilerplate with step-by-step creation history.
 -   Node package manager: Yarn 2 (even 3, actually).
 -   Code Style: Prettier.
 -   Local git hooks: Husky.
+-   Commit message linting: commitlint.
 
 ## History
 
@@ -150,3 +151,36 @@ We also add a `postinstall` script to automatically enable git hooks after insta
 ```
 
 And, just to be safe, we add the `.husky` directory to `.prettierignore`.
+
+### Linting commit message
+
+We want to enforce commit messages consistency, so we install [commitlint](https://commitlint.js.org/#/):
+
+```
+yarn add -D @commitlint/cli
+```
+
+Then we create the configuration file (`commitlint.config.js`). We won't use [Conventional Commits](https://www.conventionalcommits.org/), because it's an overkill for the project. Instead, we will use simple and permissive format, which is described [here](https://chris.beams.io/posts/git-commit).
+
+> By the way, we enabled Coding assistance for Node.js in WebStorm (**File | Settings | Languages & Frameworks | Node.js and NPM**)
+
+```javascript
+module.exports = {
+    rules: {
+        "header-case": [2, "always", "sentence-case"],
+        "header-full-stop": [2, "never", "."],
+        "header-max-length": [2, "always", 72],
+        "header-min-length": [2, "always", 1],
+        "body-full-stop": [2, "always", "."],
+        "body-leading-blank": [2, "always"],
+        "body-max-line-length": [2, "always", 72],
+        "body-case": [2, "always", "sentence-case"],
+    },
+};
+```
+
+Finally, we need to add the git hook:
+
+```bash
+yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
+```
