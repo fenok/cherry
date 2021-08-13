@@ -12,6 +12,7 @@ React project boilerplate with step-by-step creation history.
 -   Local git hooks: Husky.
 -   Commit message linting: commitlint.
 -   Running scripts for staged files: lint-staged.
+-   Bundler: Webpack.
 
 ## History
 
@@ -285,3 +286,38 @@ yarn husky add .husky/pre-commit "yarn workspaces foreach -p run pre-commit"
 ```
 
 This way, before commit, all `pre-commit` scripts will be called in parallel.
+
+### Adding Webpack
+
+We will use [Webpack](https://webpack.js.org/) as a bundler.
+
+```bash
+yarn add -D webpack webpack-cli
+```
+
+[By default](https://webpack.js.org/configuration/), Webpack expects the entry point to be `src/index.js`. Let's go ahead and create it:
+
+```javascript
+// src/index.js
+console.log("Hello");
+```
+
+We also need to add the `build` script:
+
+```json
+{
+    "scripts": {
+        "build": "webpack"
+    }
+}
+```
+
+Let's try it:
+
+```bash
+yarn build
+```
+
+As expected, we got the `dist` directory. We need to add it to `.gitignore` and `.prettierignore` in `frontend`.
+
+We also need to tell WebStorm to exclude it from indexing (**Right mouse click in Project tree | Mark Directory as | Excluded**), because we don't need to search in it. Otherwise, WebStorm will index it each time we build, which (for real-life projects) takes time and blocks other operations.
