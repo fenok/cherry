@@ -13,6 +13,7 @@ React project boilerplate with step-by-step creation history.
 -   Commit message linting: commitlint.
 -   Running scripts for staged files: lint-staged.
 -   Bundler: Webpack.
+-   Transpilation and polyfills: Babel, @babel/preset-env, core-js.
 
 ## History
 
@@ -321,3 +322,83 @@ yarn build
 As expected, we got the `dist` directory. We need to add it to `.gitignore` and `.prettierignore` in `frontend`.
 
 We also need to tell WebStorm to exclude it from indexing (**Right mouse click in Project tree | Mark Directory as | Excluded**), because we don't need to search in it. Otherwise, WebStorm will index it each time we build, which (for real-life projects) takes time and blocks other operations.
+
+### Adding Babel
+
+We will use Babel to transpile our code and add polyfills where necessary. Since we're using Webpack, we will utilize [babel-loader](https://webpack.js.org/loaders/babel-loader/):
+
+```bash
+yarn add -D babel-loader @babel/core @babel/preset-env core-js
+```
+
+> Note that core-js has a `postinstall` script which doesn't actually build anything, but forces Yarn to unplug the package. For now, we can implement a workaround on our part. We can explicitly prevent core-js from "building" by utilizing [`dependenciesMeta`](https://github.com/zloirock/core-js/issues/758#issuecomment-591829187). For some reason, we have to specify this field in the root `package.json`.
+
+Let's add [webpack config](https://webpack.js.org/configuration/):
+
+```javascript
+// webpack.config.js
+const path = require("path");
+
+module.exports = {
+    mode: "development",
+    devtool: false,
+    entry: "./src",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "main.js",
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: { cacheDirectory: path.resolve(__dirname, ".cache", "babel-loader") },
+                },
+            },
+        ],
+    },
+};
+```
+
+At this point, we want to read the output file, so we use the `development` mode without devtool.
+
+We also process `.js` files with babel-loader. To speed things up, we ignore our dependencies (`exclude: /node_modules/`) and cache the loader output (the `cacheDirectory` option).
+
+We create a separate `.cache` directory, because we don't have the `node_modules` directory, and we don't want to create files outside the project directory. Also, at least on Windows, babel-loader will create the `node_modules` directory anyway (if this option is set to `true`), which is definitely not what we want.
+
+We add the `.cache` directory to `.gitignore` and `.prettierignore` in `frontend`. We also tell WebStorm to exclude it from indexing.
+
+The rest of the Babel config goes to a separate file, because other tools may need it:
+
+```javascript
+// babel.config.js
+module.exports = {
+    presets: [
+        [
+            "@babel/preset-env",
+            {
+                useBuiltIns: "usage",
+                corejs: require("core-js/package.json").version,
+                bugfixes: true,
+            },
+        ],
+    ],
+};
+```
+
+For now, we only use the [`preset-env`](https://babeljs.io/docs/en/babel-preset-env) preset to transpile code and add polyfills according to the target environments.
+
+We set `useBuiltIns` to `"usage"` to add polyfills only for features that we're actually using. We also specify the `core-js` version (as recommended, we added `core-js` directly) by reading the version directly from the installed `core-js` package.
+
+We also enable the `bugfixes` option to potentially reduce the bundle size with no cost.
+
+Now we need to specify our target environments. Let's do this by creating the `.browserslistrc` file:
+
+```
+> 0.25%
+not dead
+```
+
+For now, we simply stick to the example from the [docs](https://babeljs.io/docs/en/babel-preset-env#browserslist-integration).

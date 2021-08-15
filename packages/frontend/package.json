@@ -15,6 +15,10 @@
         "pre-commit": "lint-staged"
     },
     "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "@babel/preset-env": "^7.15.0",
+        "babel-loader": "^8.2.2",
+        "core-js": "^3.16.1",
         "lint-staged": "^11.1.2",
         "prettier": "^2.3.2",
         "webpack": "^5.50.0",
