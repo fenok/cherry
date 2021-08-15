@@ -8,10 +8,13 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         filename: "main.js",
     },
+    resolve: {
+        extensions: [".ts"],
+    },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.ts$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",

@@ -8,5 +8,6 @@ module.exports = {
                 bugfixes: true,
             },
         ],
+        "@babel/preset-typescript",
     ],
 };

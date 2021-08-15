@@ -14,6 +14,7 @@ React project boilerplate with step-by-step creation history.
 -   Running scripts for staged files: lint-staged.
 -   Bundler: Webpack.
 -   Transpilation and polyfills: Babel, @babel/preset-env, core-js.
+-   Language: Typescript.
 
 ## History
 
@@ -402,3 +403,80 @@ not dead
 ```
 
 For now, we simply stick to the example from the [docs](https://babeljs.io/docs/en/babel-preset-env#browserslist-integration).
+
+### Adding Typescript
+
+We will use Babel to transform code written in Typescript. While there are some [limitations](https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats), it's just more convenient (the only real issue is lack of const enums).
+
+> We also add `typescript` to the root package, because we need to tell Webstorm which `typescript` to use. It makes more sense to use the root `typescript`. `typescript` versions in all workspaces must be the same.
+
+```bash
+yarn add -D typescript @babel/preset-typescript
+```
+
+Let's start with root `typescript` config. We can use `yarn tsc --init` to generate a default config which we then can edit. Here's what we ended up with:
+
+```json
+{
+    "compilerOptions": {
+        "strict": true,
+        "noImplicitOverride": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true
+    }
+}
+```
+
+We enabled strict type checks (`strict`), forced overrides to be explicit (`noImplicitOverride`), simplified usage of CommonJS modules in ES6 modules (`esModuleInterop`), and forced casing in filenames to be consistent (`forceConsistentCasingInFileNames`). The latter is important, because we support Windows, which uses case-insensitive filenames by default.
+
+Now let's create a `frontend`-specific config:
+
+```json
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "target": "ESNEXT",
+        "noEmit": true,
+        "isolatedModules": true
+    },
+    "include": ["src"]
+}
+```
+
+We extend the root config. We target `"ESNEXT"` to support all language features, because code transpilation and polyfills are handled by Babel. We don't emit anything, because Typescript will be used only for type-checking. We also enable `isolatedModules` to match Babel behavior (Babel can only process files independently).
+
+We only include the `src` directory to our Typescript project.
+
+Then we add `@babel/preset-typescript` to `babel.config.js`.
+
+Now we need to apply `babel-loader` to `.ts` files by updating the corresponding regexp. We also need to tell Webpack that we use the `.ts` extension by adding it to the `resolve.extensions` array in `webpack.config.js`.
+
+We also need to switch our `src/index.js` to `src/index.ts` and add some types for testing.
+
+At this point we can test our build:
+
+```bash
+yarn build
+```
+
+Finally, we need to add actual type-checking.
+
+Let's create a `lint` yarn script:
+
+```json
+{
+    "scripts": {
+        "lint": "tsc"
+    }
+}
+```
+
+We also need to [add type-checking to lint-staged](https://github.com/okonet/lint-staged#example-run-tsc-on-changes-to-typescript-files-but-do-not-pass-any-filename-arguments) to check types before commit:
+
+```javascript
+module.exports = {
+    "**/*.ts": () => "tsc",
+};
+```
+
+We also need to make sure that Webstorm uses the root `typescript` package (**File | Settings | Languages & Frameworks | Typescript**).
