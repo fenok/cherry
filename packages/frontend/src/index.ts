@@ -1,4 +1,4 @@
-const message: string = "Hello";
+const message = "Hello";
 
 console.log(message);
 

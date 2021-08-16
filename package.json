@@ -15,11 +15,16 @@
     "scripts": {
         "foreach": "yarn workspaces foreach -p run",
         "format": "prettier --write --ignore-unknown .",
+        "lint": "eslint .",
         "pre-commit": "lint-staged",
         "postinstall": "husky install"
     },
     "devDependencies": {
         "@commitlint/cli": "^13.1.0",
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/parser": "^4.29.2",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
         "husky": "^7.0.1",
         "lint-staged": "^11.1.2",
         "prettier": "^2.3.2",

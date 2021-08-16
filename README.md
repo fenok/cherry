@@ -15,6 +15,7 @@ React project boilerplate with step-by-step creation history.
 -   Bundler: Webpack.
 -   Transpilation and polyfills: Babel, @babel/preset-env, core-js.
 -   Language: Typescript.
+-   TS/JS linter: ESLint.
 
 ## History
 
@@ -480,3 +481,107 @@ module.exports = {
 ```
 
 We also need to make sure that Webstorm uses the root `typescript` package (**File | Settings | Languages & Frameworks | Typescript**).
+
+### Adding ESLint
+
+We'll use ESLint to lint both `.js` (most likely only configuration files) and `.ts` files.
+
+Let's start by adding `eslint` to the root package. We will also use the [`@typescript-eslint/eslint-plugin`](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin). We will disable the rules that conflict with Prettier by utilizing [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier).
+
+```bash
+yarn add -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier
+```
+
+Then we need to create the root `.eslintrc.js`:
+
+```javascript
+module.exports = {
+    root: true,
+    env: {
+        node: true,
+        es6: true,
+    },
+    extends: ["eslint:recommended", "prettier"],
+    overrides: [
+        {
+            files: ["**/*.ts"],
+            parser: "@typescript-eslint/parser",
+            parserOptions: {
+                tsconfigRootDir: __dirname,
+                project: ["./tsconfig.json", "./packages/*/tsconfig.json"],
+            },
+            plugins: ["@typescript-eslint"],
+            extends: [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "prettier",
+            ],
+        },
+    ],
+};
+```
+
+-   We mark this config as `root` to prevent potential merges with upper configs.
+
+-   We specify that we're going to use ES6 and Node.js globals.
+
+-   For `.js` files, we simply use the `eslint:recommended` set of rules.
+
+-   We use the `overrides` option to specify config for `.ts` files. We follow the [guide for monorepo](https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/MONOREPO.md) (for all recommended rules, including type checks).
+
+-   We disable the rules that conflict with Prettier.
+
+Then we need to add the root `.eslintignore` file:
+
+```
+.husky/
+.yarn/
+packages/
+.pnp.*
+```
+
+Again, we ignore packages, because they will be linted by their respective scripts.
+
+Then we need to add the root linting script:
+
+```json
+{
+    "scripts": {
+        "lint": "eslint ."
+    }
+}
+```
+
+Now let's add linting to the `frontend` package.
+
+First, we need to add `eslint`:
+
+```bash
+yarn add -D eslint
+```
+
+We also need to create local `.eslintignore`:
+
+```
+.cache/
+dist/
+```
+
+And we also need to edit the linting script:
+
+```json
+{
+    "scripts": {
+        "lint": "tsc && eslint ."
+    }
+}
+```
+
+To enable linting before commit, we need to add the following rule to all `lint-staged.config.js` files:
+
+```javascript
+module.exports = { "**/*.{js,ts}": "eslint" };
+```
+
+Finally, we need to tell Webstorm to use ESLint at **File | Settings | Language & Frameworks | Javascript | Code Quality Tools | ESLint** (Automatic ESLint configuration).
