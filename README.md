@@ -16,6 +16,7 @@ React project boilerplate with step-by-step creation history.
 -   Transpilation and polyfills: Babel, @babel/preset-env, core-js.
 -   Language: Typescript.
 -   TS/JS linter: ESLint.
+-   UI library: React.
 
 ## History
 
@@ -585,3 +586,17 @@ module.exports = { "**/*.{js,ts}": "eslint" };
 ```
 
 Finally, we need to tell Webstorm to use ESLint at **File | Settings | Language & Frameworks | Javascript | Code Quality Tools | ESLint** (Automatic ESLint configuration).
+
+### Adding React
+
+```bash
+yarn add -D react @types/react react-dom @types/react-dom @babel/preset-react
+```
+
+We enable [the New JSX Transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#manual-babel-setup).
+
+We also make all our tools (namely, lint-staged, ESLint, Webpack and babel-loader, ) aware of `.tsx` files.
+
+We change our `src/index.ts` to `src/index.tsx` to be able to use TSX. We will import stuff in our `src/index.tsx`, so we need to set the `moduleResolution` option to `"Node"` in our `tsconfig.json`. Since we won't ever use the default value, it's better to set it in the root config. We also need to tell Webpack that we're using `.js` files as well, because published packages usually consist of `.js` files.
+
+We update the `src/index.tsx` contents to actually use React and `yarn build` it to ensure that everything works.

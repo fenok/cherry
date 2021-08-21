@@ -1,5 +1,5 @@
 module.exports = {
     "*": "prettier --ignore-unknown --write",
-    "**/*.ts": () => "tsc",
-    "**/*.{js,ts}": "eslint",
+    "**/*.{ts,tsx}": () => "tsc",
+    "**/*.{js,ts,tsx}": "eslint",
 };

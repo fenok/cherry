@@ -1,4 +1,4 @@
 module.exports = {
     "*": "prettier --ignore-unknown --write",
-    "**/*.{js,ts}": "eslint",
+    "**/*.{js,ts,tsx}": "eslint",
 };

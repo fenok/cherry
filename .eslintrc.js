@@ -7,7 +7,7 @@ module.exports = {
     extends: ["eslint:recommended", "prettier"],
     overrides: [
         {
-            files: ["**/*.ts"],
+            files: ["**/*.{ts,tsx}"],
             parser: "@typescript-eslint/parser",
             parserOptions: {
                 tsconfigRootDir: __dirname,

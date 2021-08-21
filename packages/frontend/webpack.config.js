@@ -9,12 +9,12 @@ module.exports = {
         filename: "main.js",
     },
     resolve: {
-        extensions: [".ts"],
+        extensions: [".js", ".ts", ".tsx"],
     },
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",

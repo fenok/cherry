@@ -3,6 +3,7 @@
         "strict": true /* Enable all strict type-checking options. */,
         "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an 'override' modifier. */,
         "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-        "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+        "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
+        "moduleResolution": "Node"
     }
 }
