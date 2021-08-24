@@ -11,7 +11,7 @@
     "private": true,
     "scripts": {
         "format": "prettier --write --ignore-unknown .",
-        "build": "webpack",
+        "build": "webpack --env production",
         "start": "node ./dev-server",
         "lint": "tsc && eslint .",
         "pre-commit": "lint-staged"

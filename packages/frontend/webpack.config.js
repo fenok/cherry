@@ -4,10 +4,10 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const { merge } = require("webpack-merge");
 
-function common({ browserslistEnv }, isClient) {
+function common({ browserslistEnv, isProductionBuild }, isClient) {
     return {
-        mode: "development",
-        devtool: "eval-source-map",
+        mode: isProductionBuild ? "production" : "development",
+        devtool: isProductionBuild ? false : "eval-source-map",
         resolve: {
             extensions: [".js", ".ts", ".tsx"],
         },
@@ -23,25 +23,52 @@ function common({ browserslistEnv }, isClient) {
                         loader: "babel-loader",
                         options: {
                             cacheDirectory: path.resolve(__dirname, ".cache", "babel-loader"),
-                            caller: { browserslistEnv, isClient },
+                            caller: { browserslistEnv, isClient, isProductionBuild },
                         },
                     },
                 },
             ],
         },
+        plugins: [
+            new webpack.DefinePlugin({
+                "process.env.NODE_ENV": JSON.stringify(isProductionBuild ? "production" : "development"),
+            }),
+        ],
     };
 }
 
-function client({ browserslistEnv }) {
+function client({ browserslistEnv, isProductionBuild }) {
     return {
         name: "client",
         target: `browserslist:${browserslistEnv}`,
-        entry: ["webpack-hot-middleware/client?reload=true&noInfo=true&name=client", "./src/client"],
+        entry: [
+            !isProductionBuild ? "webpack-hot-middleware/client?reload=true&noInfo=true&name=client" : undefined,
+            "./src/client",
+        ].filter(Boolean),
         output: {
+            filename: isProductionBuild ? "[contenthash].js" : "[name].[contenthash].js",
             path: path.resolve(__dirname, "dist", "client"),
-            filename: "main.js",
         },
-        plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin(), new LoadablePlugin()],
+        plugins: [
+            !isProductionBuild ? new webpack.HotModuleReplacementPlugin() : undefined,
+            !isProductionBuild ? new ReactRefreshWebpackPlugin() : undefined,
+            new LoadablePlugin({
+                filename: "../server/loadable-stats.json",
+            }),
+        ].filter(Boolean),
+        optimization: {
+            moduleIds: "deterministic",
+            runtimeChunk: "single",
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: "vendors",
+                        chunks: "all",
+                    },
+                },
+            },
+        },
     };
 }
 
@@ -51,8 +78,8 @@ function server({ browserslistEnv }) {
         target: `browserslist:${browserslistEnv}`,
         entry: "./src/server",
         output: {
+            filename: "index.js",
             path: path.resolve(__dirname, "dist", "server"),
-            filename: "main.js",
             library: {
                 type: "commonjs2",
             },
@@ -65,9 +92,13 @@ function server({ browserslistEnv }) {
     };
 }
 
-module.exports = () => {
-    const clientConfig = { browserslistEnv: "client" };
-    const serverConfig = { browserslistEnv: "server" };
+module.exports = (env = {}) => {
+    const isProductionBuild = env.production;
+    const clientConfig = { browserslistEnv: "client", isProductionBuild };
+    const serverConfig = { browserslistEnv: "server", isProductionBuild };
+
+    // We don't rely on it, but set it anyway for tools which might depend on it.
+    process.env.NODE_ENV = isProductionBuild ? "production" : "development";
 
     return [
         merge(common(clientConfig, true), client(clientConfig)),

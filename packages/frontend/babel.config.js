@@ -1,6 +1,7 @@
 module.exports = (api) => {
     const browserslistEnv = api.caller((caller = {}) => caller.browserslistEnv);
     const isClient = api.caller((caller = {}) => caller.isClient);
+    const isProductionBuild = api.caller((caller = {}) => caller.isProductionBuild);
 
     return {
         presets: [
@@ -16,6 +17,8 @@ module.exports = (api) => {
             "@babel/preset-typescript",
             ["@babel/preset-react", { runtime: "automatic" }],
         ],
-        plugins: [isClient ? "react-refresh/babel" : undefined, "@loadable/babel-plugin"].filter(Boolean),
+        plugins: [isClient && !isProductionBuild ? "react-refresh/babel" : undefined, "@loadable/babel-plugin"].filter(
+            Boolean
+        ),
     };
 };
