@@ -1,6 +1,9 @@
 [production]
+node 14.17
+
+[server]
+node 14.17
+
+[client]
 > 0.25%
 not dead
-
-[ssr]
-node 14.17

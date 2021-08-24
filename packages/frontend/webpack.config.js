@@ -1,7 +1,9 @@
 const path = require("path");
+const webpack = require("webpack");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const { merge } = require("webpack-merge");
 
-function common({ browserslistEnv }) {
+function common({ browserslistEnv }, isClient) {
     return {
         mode: "development",
         devtool: "eval-source-map",
@@ -17,7 +19,7 @@ function common({ browserslistEnv }) {
                         loader: "babel-loader",
                         options: {
                             cacheDirectory: path.resolve(__dirname, ".cache", "babel-loader"),
-                            caller: { browserslistEnv },
+                            caller: { browserslistEnv, isClient },
                         },
                     },
                 },
@@ -30,11 +32,12 @@ function client({ browserslistEnv }) {
     return {
         name: "client",
         target: `browserslist:${browserslistEnv}`,
-        entry: "./src/client",
+        entry: ["webpack-hot-middleware/client?reload=true&noInfo=true&name=client", "./src/client"],
         output: {
             path: path.resolve(__dirname, "dist", "client"),
             filename: "main.js",
         },
+        plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
     };
 }
 
@@ -54,8 +57,11 @@ function server({ browserslistEnv }) {
 }
 
 module.exports = () => {
-    const clientConfig = { browserslistEnv: "production" };
-    const serverConfig = { browserslistEnv: "ssr" };
+    const clientConfig = { browserslistEnv: "client" };
+    const serverConfig = { browserslistEnv: "server" };
 
-    return [merge(common(clientConfig), client(clientConfig)), merge(common(serverConfig), server(serverConfig))];
+    return [
+        merge(common(clientConfig, true), client(clientConfig)),
+        merge(common(serverConfig, false), server(serverConfig)),
+    ];
 };

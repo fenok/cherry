@@ -18,6 +18,7 @@ React project boilerplate with step-by-step creation history.
 -   TS/JS linter: ESLint.
 -   UI library: React.
 -   Server-Side Rendering: ✅.
+-   Hot Module Replacement: ✅ (React Fast Refresh).
 
 ## History
 
@@ -645,3 +646,17 @@ We `name` our target-specific configs to differ them and make the CLI output mor
 We specify config targets by [using browserslist](https://webpack.js.org/configuration/target/#browserslist).
 
 We also have to specify the [`output.library.type`](https://webpack.js.org/configuration/output/#type-commonjs2) option for server config, because we will use the output file in Node.
+
+### Adding React Fast Refresh (HMR)
+
+```bash
+yarn add -D @pmmmwh/react-refresh-webpack-plugin react-refresh webpack-hot-middleware
+```
+
+First, we configure [webpack-hot-middleware](https://github.com/webpack-contrib/webpack-hot-middleware#installation--usage). We enable additional [options](https://github.com/webpack-contrib/webpack-hot-middleware#config) to reload in case of an error and to remove informational logs (which are extremely noisy). We also specified `name`, because we are in multi-compiler mode (we return an array of Webpack configurations).
+
+Then, we need to configure [react-refresh-webpack-plugin](https://github.com/pmmmwh/react-refresh-webpack-plugin/#usage).
+
+Note that we configure HMR only on the client side.
+
+We also updated `.browserslistrc` to explicitly define `client` and `server` environments. We also use `server` environment by default. This is because we want Babel to fall back to `server` environment if it's used outside of Webpack.
