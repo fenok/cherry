@@ -1,14 +1,17 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 
 interface HtmlProps {
     content: string;
+    scripts: ReactElement[];
+    scriptLinks: ReactElement[];
 }
 
-const Html: FC<HtmlProps> = ({ content }) => (
+const Html: FC<HtmlProps> = ({ content, scriptLinks, scripts }) => (
     <html>
+        <head>{scriptLinks}</head>
         <body>
             <div id={"root"} dangerouslySetInnerHTML={{ __html: content }} />
-            <script src={"/main.js"} />
+            {scripts}
         </body>
     </html>
 );

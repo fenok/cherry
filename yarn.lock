@@ -572,7 +572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-dynamic-import@npm:^7.8.3":
+"@babel/plugin-syntax-dynamic-import@npm:^7.7.4, @babel/plugin-syntax-dynamic-import@npm:^7.8.3":
   version: 7.8.3
   resolution: "@babel/plugin-syntax-dynamic-import@npm:7.8.3"
   dependencies:
@@ -1280,7 +1280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4":
   version: 7.15.3
   resolution: "@babel/runtime@npm:7.15.3"
   dependencies:
@@ -1532,6 +1532,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@loadable/babel-plugin@npm:^5.13.2":
+  version: 5.13.2
+  resolution: "@loadable/babel-plugin@npm:5.13.2"
+  dependencies:
+    "@babel/plugin-syntax-dynamic-import": ^7.7.4
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: c7e8376d97d66f03a440e6d9e09d64234713a71403d418af2c551c4e4fdfc5943be7ac506ef2425701f6ceb971941822edb7b224e75b6d94bddbeb3492f5da34
+  languageName: node
+  linkType: hard
+
+"@loadable/component@npm:^5.15.0":
+  version: 5.15.0
+  resolution: "@loadable/component@npm:5.15.0"
+  dependencies:
+    "@babel/runtime": ^7.7.7
+    hoist-non-react-statics: ^3.3.1
+    react-is: ^16.12.0
+  peerDependencies:
+    react: ">=16.3.0"
+  checksum: 20d2836ea18431843ed25fa243f27d63a1a7bc9b541f12e7fdc95ed6be53311cd0f9467db293c4b7ea801c0950226abdcb4ea45aa7e13d5f2f728e70d1a4576e
+  languageName: node
+  linkType: hard
+
+"@loadable/server@npm:^5.15.1":
+  version: 5.15.1
+  resolution: "@loadable/server@npm:5.15.1"
+  dependencies:
+    lodash: ^4.17.15
+  peerDependencies:
+    "@loadable/component": ^5.0.1
+    react: ">=16.3.0"
+  checksum: cd8ba04709bd66bad426619a160fc814a7e14fe2006b5a1a6e44ba7832b455a34354dc75f8101496e6d384f972ea30befcaa2c23e13db553d7fdb1ed191d1a94
+  languageName: node
+  linkType: hard
+
+"@loadable/webpack-plugin@npm:^5.15.1":
+  version: 5.15.1
+  resolution: "@loadable/webpack-plugin@npm:5.15.1"
+  dependencies:
+    make-dir: ^3.0.2
+  peerDependencies:
+    webpack: ">=4.6.0"
+  checksum: e4edc018f8ecb759ffae0b9d3603a90d78947b71768dee930569848fb3f4b268a55fb555c82bb84fe4f8c87b7173c79cb08d71812db7f3f7c6296cc210f9d699
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1668,6 +1715,24 @@ __metadata:
   version: 7.0.9
   resolution: "@types/json-schema@npm:7.0.9"
   checksum: 259d0e25f11a21ba5c708f7ea47196bd396e379fddb79c76f9f4f62c945879dc21657904914313ec2754e443c5018ea8372362f323f30e0792897fdb2098a705
+  languageName: node
+  linkType: hard
+
+"@types/loadable__component@npm:^5.13.4":
+  version: 5.13.4
+  resolution: "@types/loadable__component@npm:5.13.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: a2d1c77b952eb15c45dfad841a7a0a3e4045f828e1f0ecbab997a306a56a48cd48ee12ee75bf79f59bbcff0347bbeb120106e8e66c91a38a530a028e1598b130
+  languageName: node
+  linkType: hard
+
+"@types/loadable__server@npm:^5.12.6":
+  version: 5.12.6
+  resolution: "@types/loadable__server@npm:5.12.6"
+  dependencies:
+    "@types/react": "*"
+  checksum: 537dc50b4034e74f0f73e81bca19ebc2388a5521f93353179ceaabdcb5bd6dad912ddf7b9ca8187cbf665dd2f8ae0c839fcec51c1c68b36a88c0431e3122bda0
   languageName: node
   linkType: hard
 
@@ -3336,8 +3401,14 @@ __metadata:
     "@babel/preset-env": ^7.15.0
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
+    "@loadable/babel-plugin": ^5.13.2
+    "@loadable/component": ^5.15.0
+    "@loadable/server": ^5.15.1
+    "@loadable/webpack-plugin": ^5.15.1
     "@pmmmwh/react-refresh-webpack-plugin": ^0.4.3
     "@types/express": ^4.17.13
+    "@types/loadable__component": ^5.13.4
+    "@types/loadable__server": ^5.12.6
     "@types/react": ^17.0.19
     "@types/react-dom": ^17.0.9
     babel-loader: ^8.2.2
@@ -3562,6 +3633,15 @@ __metadata:
   dependencies:
     function-bind: ^1.1.1
   checksum: b9ad53d53be4af90ce5d1c38331e712522417d017d5ef1ebd0507e07c2fbad8686fffb8e12ddecd4c39ca9b9b47431afbb975b8abf7f3c3b82c98e9aad052792
+  languageName: node
+  linkType: hard
+
+"hoist-non-react-statics@npm:^3.3.1":
+  version: 3.3.2
+  resolution: "hoist-non-react-statics@npm:3.3.2"
+  dependencies:
+    react-is: ^16.7.0
+  checksum: b1538270429b13901ee586aa44f4cc3ecd8831c061d06cb8322e50ea17b3f5ce4d0e2e66394761e6c8e152cd8c34fb3b4b690116c6ce2bd45b18c746516cb9e8
   languageName: node
   linkType: hard
 
@@ -4777,6 +4857,13 @@ __metadata:
   peerDependencies:
     react: 17.0.2
   checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
+  languageName: node
+  linkType: hard
+
+"react-is@npm:^16.12.0, react-is@npm:^16.7.0":
+  version: 16.13.1
+  resolution: "react-is@npm:16.13.1"
+  checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
   languageName: node
   linkType: hard
 

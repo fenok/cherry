@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const LoadablePlugin = require("@loadable/webpack-plugin");
 const { merge } = require("webpack-merge");
 
 function common({ browserslistEnv }, isClient) {
@@ -9,6 +10,9 @@ function common({ browserslistEnv }, isClient) {
         devtool: "eval-source-map",
         resolve: {
             extensions: [".js", ".ts", ".tsx"],
+        },
+        output: {
+            clean: true,
         },
         module: {
             rules: [
@@ -37,7 +41,7 @@ function client({ browserslistEnv }) {
             path: path.resolve(__dirname, "dist", "client"),
             filename: "main.js",
         },
-        plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin()],
+        plugins: [new webpack.HotModuleReplacementPlugin(), new ReactRefreshWebpackPlugin(), new LoadablePlugin()],
     };
 }
 
@@ -53,6 +57,11 @@ function server({ browserslistEnv }) {
                 type: "commonjs2",
             },
         },
+        plugins: [
+            new webpack.optimize.LimitChunkCountPlugin({
+                maxChunks: 1,
+            }),
+        ],
     };
 }
 

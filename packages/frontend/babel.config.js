@@ -16,6 +16,6 @@ module.exports = (api) => {
             "@babel/preset-typescript",
             ["@babel/preset-react", { runtime: "automatic" }],
         ],
-        plugins: [isClient ? "react-refresh/babel" : undefined].filter(Boolean),
+        plugins: [isClient ? "react-refresh/babel" : undefined, "@loadable/babel-plugin"].filter(Boolean),
     };
 };
