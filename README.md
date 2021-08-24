@@ -17,6 +17,7 @@ React project boilerplate with step-by-step creation history.
 -   Language: Typescript.
 -   TS/JS linter: ESLint.
 -   UI library: React.
+-   Server-Side Rendering: ✅.
 
 ## History
 
@@ -600,3 +601,47 @@ We also make all our tools (namely, lint-staged, ESLint, Webpack and babel-loade
 We change our `src/index.ts` to `src/index.tsx` to be able to use TSX. We will import stuff in our `src/index.tsx`, so we need to set the `moduleResolution` option to `"Node"` in our `tsconfig.json`. Since we won't ever use the default value, it's better to set it in the root config. We also need to tell Webpack that we're using `.js` files as well, because published packages usually consist of `.js` files.
 
 We update the `src/index.tsx` contents to actually use React and `yarn build` it to ensure that everything works.
+
+### Adding SSR
+
+```bash
+yarn add -D webpack-dev-middleware express @types/express webpack-merge require-from-string
+```
+
+#### Dev server
+
+Now we want to see our code in action. Since we want SSR, there is no point in using webpack-dev-server and/or HtmlWebpackPlugin.
+
+We will build our own dev-server with SSR support. We will use [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) for that.
+
+The server will be relatively simple, and it's an isolated thing, so it's easier to just write it in plain JS. We could use ts-node, but it feels like an overcomplication.
+
+To enable SSR, we set the `serverSideRender` option to `true`. Now we can write our own `ssrMiddleware`, using the [guide](https://github.com/webpack/webpack-dev-middleware#server-side-rendering) from webpack-dev-middleware as an example.
+
+Note how we expect Webpack to produce multiple builds. We take the (latest!) `server` build and `require` its `main` chunk with the help of `require-from-string` package. This way, we can always render the latest build on the server.
+
+We expect the `main` chunk to export a `render` function, which returns a promise, because the render process can be asynchronous due to, e.g., data fetching. The promise resolves with everything we need to send a response.
+
+> We need to set the `env.es2017` option to `true` in the root `.eslintrc.js` to be able to use async/await.
+
+We consciously decouple the `render` function from the networking library. It's easier to use `express` in development, but we might want to use `fastify` in production, for example.
+
+We also define the `start` yarn script, which just starts the dev server.
+
+#### Webpack config
+
+> We need to update Yarn because of this [issue](https://github.com/yarnpkg/berry/issues/3234).
+
+We need to create two Webpack configs: one for the client, and the other one for the server. We split the existing config into common and target-specific parts, and we make them functions to be able to tweak them. We merge them via `webpack-merge` and return them as an array of two configurations.
+
+Now we **do** need source maps, so we set the [`devtool`](https://webpack.js.org/configuration/devtool/#devtool) option to `eval-source-map` (high quality source maps, recommended for development).
+
+Since we have two environments, we need to specify two sets of targets in our `.browserslistrc`. We move our original targets to the `production` environment, because it's the [default](https://github.com/browserslist/browserslist#configuring-for-different-environments). We also specify the `ssr` environment with our Node version (14.17.5).
+
+We pass the browserslist environment (`browserslistEnv`) to the Babel config via the `caller` option, and obtain it there via the [`caller` API](https://babeljs.io/docs/en/config-files#apicallercb). Note that we could use the [built-in option](https://github.com/babel/babel-loader#customize-config-based-on-webpack-target), but it's easier to just pass `browserslistEnv` directly.
+
+We `name` our target-specific configs to differ them and make the CLI output more readable.
+
+We specify config targets by [using browserslist](https://webpack.js.org/configuration/target/#browserslist).
+
+We also have to specify the [`output.library.type`](https://webpack.js.org/configuration/output/#type-commonjs2) option for server config, because we will use the output file in Node.

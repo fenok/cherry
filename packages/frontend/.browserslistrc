@@ -1,2 +1,6 @@
+[production]
 > 0.25%
 not dead
+
+[ssr]
+node 14.17
