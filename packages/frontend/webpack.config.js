@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const { merge } = require("webpack-merge");
@@ -12,20 +13,47 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
             extensions: [".js", ".ts", ".tsx"],
         },
         output: {
-            clean: true,
+            clean: isProductionBuild,
         },
+        stats: "errors-only",
         module: {
             rules: [
                 {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
-                    use: {
-                        loader: "babel-loader",
-                        options: {
-                            cacheDirectory: path.resolve(__dirname, ".cache", "babel-loader"),
-                            caller: { browserslistEnv, isClient, isProductionBuild },
+                    use: [
+                        {
+                            loader: "babel-loader",
+                            options: {
+                                cacheDirectory: path.resolve(__dirname, ".cache", "babel-loader"),
+                                caller: { browserslistEnv, isClient, isProductionBuild },
+                            },
                         },
-                    },
+                        {
+                            loader: "@linaria/webpack-loader",
+                            options: {
+                                cacheDirectory: path.resolve(__dirname, ".cache", "linaria"),
+                                sourceMap: !isProductionBuild,
+                            },
+                        },
+                    ],
+                },
+                {
+                    test: /\.css$/,
+                    use: [
+                        {
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                emit: isClient,
+                            },
+                        },
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: !isProductionBuild,
+                            },
+                        },
+                    ],
                 },
             ],
         },
@@ -33,7 +61,14 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
             new webpack.DefinePlugin({
                 "process.env.NODE_ENV": JSON.stringify(isProductionBuild ? "production" : "development"),
             }),
-        ],
+            new MiniCssExtractPlugin({
+                filename: isProductionBuild ? "[contenthash].css" : "[name].css",
+            }),
+            !isProductionBuild &&
+                new webpack.SourceMapDevToolPlugin({
+                    test: /\.css$/,
+                }),
+        ].filter(Boolean),
     };
 }
 
@@ -46,7 +81,7 @@ function client({ browserslistEnv, isProductionBuild }) {
             "./src/client",
         ].filter(Boolean),
         output: {
-            filename: isProductionBuild ? "[contenthash].js" : "[name].[contenthash].js",
+            filename: isProductionBuild ? "[contenthash].js" : "[name].js",
             path: path.resolve(__dirname, "dist", "client"),
         },
         plugins: [

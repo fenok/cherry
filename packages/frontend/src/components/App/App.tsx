@@ -1,15 +1,6 @@
-import { FC, useState } from "react";
-import { NameDisplay } from "../NameDisplay";
+import { FC } from "react";
+import { MainPage } from "../MainPage";
 
-const App: FC = () => {
-    const [name, setName] = useState<string>();
-
-    return (
-        <div>
-            Hello, {name ? <NameDisplay name={name} /> : "[unknown]"}!
-            <button onClick={() => setName("world")}>Set name</button>
-        </div>
-    );
-};
+const App: FC = () => <MainPage />;
 
 export { App };

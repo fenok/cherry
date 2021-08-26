@@ -25,7 +25,8 @@ export function render({ stats }: RenderOptions): Promise<RenderResult> {
     const html = createElement(Html, {
         content,
         scripts: extractor.getScriptElements(),
-        scriptLinks: extractor.getLinkElements(),
+        links: extractor.getLinkElements(),
+        styles: extractor.getStyleElements(),
     });
 
     return Promise.resolve({ statusCode: 200, body: `<!DOCTYPE html>${renderToStaticMarkup(html)}` });

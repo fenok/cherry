@@ -16,6 +16,7 @@ module.exports = (api) => {
             ],
             "@babel/preset-typescript",
             ["@babel/preset-react", { runtime: "automatic" }],
+            "@linaria",
         ],
         plugins: [isClient && !isProductionBuild ? "react-refresh/babel" : undefined, "@loadable/babel-plugin"].filter(
             Boolean

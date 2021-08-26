@@ -20,6 +20,7 @@ React project boilerplate with step-by-step creation history.
 -   Server-Side Rendering: ✅.
 -   Hot Module Replacement: ✅ (React Fast Refresh).
 -   Code-splitting: ✅ (loadable-components).
+-   CSS: linaria.
 
 ## History
 
@@ -691,3 +692,22 @@ We use [`DefinePlugin`](https://webpack.js.org/plugins/define-plugin/) to replac
 We also move the `LoadablePlugin` output file (`loadable-stats.json`) to the `server` output directory. We do so because `loadable-stats.json` contains potentially sensitive data (absolute local path), and it's only needed on the server side. This way, we can simply serve the whole `client` output directory with no worries. We also switched to using `loadable-stats.json` in development mode for consistency.
 
 We also change the server bundle name to `index.js` for convenience.
+
+### Adding linaria
+
+For CSS, we will use [linaria](https://github.com/callstack/linaria), because CSS-in-JS is [convenient](https://github.com/callstack/linaria/blob/master/docs/BENEFITS.md), and linaria allows extracting CSS during build, so we basically get the best of both worlds.
+
+The [setup](https://github.com/callstack/linaria/blob/master/docs/BUNDLERS_INTEGRATION.md#webpack) is pretty straightforward, but there are caveats:
+
+-   For some reason, we can't write CSS in the root (`App`) component, because otherwise HMR breaks. It's not a big deal, because in a real-world application the root component rarely has any CSS.
+-   The `output.clean` option should only be enabled in production mode, because otherwise the output directory will be cleared before an incremental build, ruining HMR in cases where we need the previous `hot-update` files (which is always the case if we update linaria CSS).
+-   We only emit CSS files on the client side, because they have no use on the server side.
+-   In development mode, we can't add hashes to the emitted CSS files names, because otherwise CSS HMR won't work. We also removed hashes from JS files for consistency.
+-   There is a [bug](https://stackoverflow.com/a/42969608) in Chrome which can be solved by adding a synchronous empty `script`.
+-   Apparently, ESLint breaks if something was imported from a `.tsx` file (for instance, `styled(ImportedComponent)` causes a linting type-related error) unless we specify `"jsx": "react-jsx"` in the root TS config. Despite the fact that it's already specified in the corresponding child config.
+-   Linaria is not completely honest with its dependencies. We fix it using `packageExtensions` option in `.yarnrc.yml`.
+-   We [can't](https://github.com/webpack-contrib/mini-css-extract-plugin/issues/529#issuecomment-671435022) use `eval-source-map` for CSS, but we don't want to switch exclusively to `source-map` either, because the former option is faster. Instead, we make use of [SourceMapDevToolPlugin](https://webpack.js.org/plugins/source-map-dev-tool-plugin/). We enable it only for CSS and only in development.
+
+We also [configure](https://github.com/callstack/linaria/blob/master/docs/CONFIGURATION.md) linaria to add a display name to generated class names in development mode.
+
+Also, the Webpack logs are pretty noisy, so we set the `stats` options to `"errors-only"`.
