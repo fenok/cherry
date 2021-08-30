@@ -21,6 +21,7 @@ React project boilerplate with step-by-step creation history.
 -   Hot Module Replacement: ✅ (React Fast Refresh).
 -   Code-splitting: ✅ (loadable-components).
 -   CSS: linaria.
+-   CSS linter: Stylelint.
 
 ## History
 
@@ -711,3 +712,13 @@ The [setup](https://github.com/callstack/linaria/blob/master/docs/BUNDLERS_INTEG
 We also [configure](https://github.com/callstack/linaria/blob/master/docs/CONFIGURATION.md) linaria to add a display name to generated class names in development mode.
 
 Also, the Webpack logs are pretty noisy, so we set the `stats` options to `"errors-only"`.
+
+### Adding stylelint
+
+We will use [linaria guide](https://github.com/callstack/linaria/blob/master/docs/LINTING.md). Just like before, we install stylelint (and create its config) at the root package. We also move linaria config to the root package.
+
+We also install stylelint at the `frontend` package, because we need to run it from there. We update the lint-staged config accordingly and add the corresponding yarn script.
+
+We also enable stylelint in Webstorm (**File | Settings | Languages & Frameworks | Style Sheets | Stylelint**). We select the root stylelint package and enable JS files processing.
+
+We also fix stylelint-related dependency at `.yarnrc.yml`.
