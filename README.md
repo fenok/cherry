@@ -722,3 +722,18 @@ We also install stylelint at the `frontend` package, because we need to run it f
 We also enable stylelint in Webstorm (**File | Settings | Languages & Frameworks | Style Sheets | Stylelint**). We select the root stylelint package and enable JS files processing.
 
 We also fix stylelint-related dependency at `.yarnrc.yml`.
+
+### Resetting default styles
+
+CSS resetting is a tough subject. For the sake of simplicity, we'll rely on [a modern CSS reset](https://piccalil.li/blog/a-modern-css-reset/) with some omissions:
+
+-   `scroll-behavior: smooth;` may not be suitable for all projects, and it can easily be applied if needed.
+-   All `body` defaults are unnecessary:
+    -   `min-height: 100vh;` is downright [harmful](https://dev.to/fenok/stretching-body-to-full-viewport-height-the-missing-way-2ghd).
+    -   `text-rendering: optimizeSpeed;` seems to prevent the browser from doing its job. We can change `text-rendering` as (and where) necessary later.
+    -   `line-height: 1.5;` is just useless: we should set default typography settings either way.
+-   `text-decoration-skip-ink: auto;` is not necessarily suitable for all projects. It can easily be applied where necessary.
+-   Images are consistently inline by default, and sometimes we want that, so `display: block;` on them by default doesn't sound right. `max-width: 100%;` can cause [issues](https://github.com/andy-piccalilli/modern-css-reset/pull/41), so it's easier to apply it where necessary.
+-   `@media (prefers-reduced-motion: reduce)` is good, but we might want to tweak animations individually.
+
+We also need to tell Stylelint to [ignore](https://github.com/callstack/linaria/issues/443) `global` pseudo class, because, apparently, it's not a part of `@linaria/stylelint` config.
