@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { EntityType } from "./../../../../ApolloTypes/globalTypes";
+import { EntityType } from "../../../../../ApolloTypes/globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetEntity

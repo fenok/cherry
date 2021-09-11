@@ -1,9 +1,10 @@
+import "./meta/server";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import { createElement } from "react";
 import { ChunkExtractor } from "@loadable/server";
-import { App } from "./components/App";
-import { Html } from "./components/Html";
-import { getApolloClient } from "./lib/getApolloClient";
+import { App } from "./app/components/App";
+import { Html } from "./app/components/Html";
+import { getApolloClient } from "./app/lib/getApolloClient";
 import fetch from "cross-fetch";
 import { getDataFromTree } from "@apollo/client/react/ssr";
 
