@@ -6520,6 +6520,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["define-lazy-prop", [
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/define-lazy-prop-npm-2.0.0-bba0cd91a7-0115fdb065.zip/node_modules/define-lazy-prop/",
+          "packageDependencies": [
+            ["define-lazy-prop", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["define-properties", [
         ["npm:1.1.3", {
           "packageLocation": "./.yarn/cache/define-properties-npm-1.1.3-0f3115e2b9-da80dba55d.zip/node_modules/define-properties/",
@@ -7627,6 +7636,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graphql", "npm:15.5.3"],
             ["lint-staged", "npm:11.1.2"],
             ["mini-css-extract-plugin", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:2.2.2"],
+            ["open", "npm:8.2.1"],
             ["prettier", "npm:2.3.2"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:17.0.2"],
@@ -10493,6 +10503,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["onetime", "npm:5.1.2"],
             ["mimic-fn", "npm:2.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["open", [
+        ["npm:8.2.1", {
+          "packageLocation": "./.yarn/cache/open-npm-8.2.1-f135ffeb36-fcde005918.zip/node_modules/open/",
+          "packageDependencies": [
+            ["open", "npm:8.2.1"],
+            ["define-lazy-prop", "npm:2.0.0"],
+            ["is-docker", "npm:2.2.1"],
+            ["is-wsl", "npm:2.2.0"]
           ],
           "linkType": "HARD",
         }]
