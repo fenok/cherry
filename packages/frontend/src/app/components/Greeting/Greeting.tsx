@@ -2,7 +2,7 @@ import { FC } from "react";
 import { styled } from "@linaria/react";
 import { useQuery } from "@apollo/client";
 import { ENTITY_QUERY } from "./graphql";
-import { GetEntity } from "./ApolloTypes/GetEntity";
+import { GetEntity } from "./apollo-types/GetEntity";
 
 const Greeting: FC = () => {
     const { data } = useQuery<GetEntity>(ENTITY_QUERY);
