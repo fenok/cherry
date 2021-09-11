@@ -13,7 +13,7 @@
         "format": "prettier --write --ignore-unknown .",
         "build": "webpack --env production",
         "start": "node ./dev-server",
-        "apollo:codegen": "apollo client:codegen ApolloTypes --localSchemaFile=../../schema.graphql --target=typescript",
+        "apollo:codegen": "apollo client:codegen ApolloTypes --localSchemaFile=../../schema.graphql --target=typescript --globalTypesFile=./src/app/lib/apollo-globals.ts",
         "lint:es": "tsc && eslint .",
         "lint:css": "stylelint ./src/**/*.{ts,tsx}",
         "pre-commit": "lint-staged"
