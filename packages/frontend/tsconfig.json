@@ -7,5 +7,5 @@
         "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */,
         "jsx": "react-jsx"
     },
-    "include": ["src"]
+    "include": ["src", "@types"]
 }

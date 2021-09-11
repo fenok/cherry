@@ -3,6 +3,9 @@ import { createElement } from "react";
 import { ChunkExtractor } from "@loadable/server";
 import { App } from "./components/App";
 import { Html } from "./components/Html";
+import { getApolloClient } from "./lib/getApolloClient";
+import fetch from "cross-fetch";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 export interface RenderOptions {
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -15,15 +18,19 @@ export interface RenderResult {
     body?: string;
 }
 
-export function render({ stats }: RenderOptions): Promise<RenderResult> {
-    const app = createElement(App);
-
+export async function render({ stats }: RenderOptions): Promise<RenderResult> {
+    const client = getApolloClient({ fetch });
     const extractor = new ChunkExtractor({ stats, publicPath: "/" });
 
-    const content = renderToString(extractor.collectChunks(app));
+    const app = extractor.collectChunks(createElement(App, { client }));
+
+    await getDataFromTree(app);
+
+    const content = renderToString(app);
 
     const html = createElement(Html, {
         content,
+        apolloState: client.extract(),
         scripts: extractor.getScriptElements(),
         links: extractor.getLinkElements(),
         styles: extractor.getStyleElements(),

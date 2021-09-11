@@ -60,6 +60,7 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
         plugins: [
             new webpack.DefinePlugin({
                 "process.env.NODE_ENV": JSON.stringify(isProductionBuild ? "production" : "development"),
+                SSR_MODE: JSON.stringify(!isClient),
             }),
             new MiniCssExtractPlugin({
                 filename: isProductionBuild ? "[contenthash].css" : "[name].css",
@@ -78,6 +79,7 @@ function client({ browserslistEnv, isProductionBuild }) {
         target: `browserslist:${browserslistEnv}`,
         entry: [
             !isProductionBuild ? "webpack-hot-middleware/client?reload=true&noInfo=true&name=client" : undefined,
+            "./src/globals/client",
             "./src/client",
         ].filter(Boolean),
         output: {
@@ -111,7 +113,7 @@ function server({ browserslistEnv }) {
     return {
         name: "server",
         target: `browserslist:${browserslistEnv}`,
-        entry: "./src/server",
+        entry: ["./src/globals/server", "./src/server"],
         output: {
             filename: "index.js",
             path: path.resolve(__dirname, "dist", "server"),

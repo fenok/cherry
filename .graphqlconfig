@@ -1,0 +1,15 @@
+{
+  "name": "Cherry GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Cherry Glitch Endpoint": {
+        "url": "https://cherry-apollo.glitch.me",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
