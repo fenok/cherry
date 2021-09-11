@@ -1,4 +1,6 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
+import { sha256 } from "crypto-hash";
 
 export interface ApolloClientOptions {
     fetch?: typeof fetch;
@@ -24,6 +26,8 @@ export function getApolloClient({ fetch }: ApolloClientOptions = {}) {
         },
         ssrMode: SSR_MODE,
         cache,
-        link: new HttpLink({ uri: __PUBLIC_CONFIG__.GRAPHQL_ENDPOINT, fetch }),
+        link: createPersistedQueryLink({ sha256 }).concat(
+            new HttpLink({ uri: __PUBLIC_CONFIG__.GRAPHQL_ENDPOINT, fetch })
+        ),
     });
 }

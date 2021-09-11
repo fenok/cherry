@@ -6367,6 +6367,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["crypto-hash", [
+        ["npm:1.3.0", {
+          "packageLocation": "./.yarn/cache/crypto-hash-npm-1.3.0-8ec42184ed-a3a507e0d2.zip/node_modules/crypto-hash/",
+          "packageDependencies": [
+            ["crypto-hash", "npm:1.3.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["css-loader", [
         ["npm:6.2.0", {
           "packageLocation": "./.yarn/cache/css-loader-npm-6.2.0-30f8138f4a-9c6e6e1eef.zip/node_modules/css-loader/",
@@ -7610,6 +7619,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-loader", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:8.2.2"],
             ["core-js", "npm:3.16.1"],
             ["cross-fetch", "npm:3.1.4"],
+            ["crypto-hash", "npm:1.3.0"],
             ["css-loader", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:6.2.0"],
             ["eslint", "npm:7.32.0"],
             ["express", "npm:4.17.1"],
