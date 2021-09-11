@@ -1,4 +1,4 @@
-import "./meta/client";
+import "./meta/publicPath";
 import { hydrate } from "react-dom";
 import { createElement } from "react";
 import { loadableReady } from "@loadable/component";

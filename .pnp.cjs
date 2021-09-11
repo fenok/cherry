@@ -3924,6 +3924,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@types/webpack-env", [
+        ["npm:1.16.2", {
+          "packageLocation": "./.yarn/cache/@types-webpack-env-npm-1.16.2-f0651e60fb-122273f20e.zip/node_modules/@types/webpack-env/",
+          "packageDependencies": [
+            ["@types/webpack-env", "npm:1.16.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@types/zen-observable", [
         ["npm:0.8.3", {
           "packageLocation": "./.yarn/cache/@types-zen-observable-npm-0.8.3-b3fac445d1-08c88354ab.zip/node_modules/@types/zen-observable/",
@@ -7596,6 +7605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/loadable__server", "npm:5.12.6"],
             ["@types/react", "npm:17.0.19"],
             ["@types/react-dom", "npm:17.0.9"],
+            ["@types/webpack-env", "npm:1.16.2"],
             ["apollo", "npm:2.33.6"],
             ["babel-loader", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:8.2.2"],
             ["core-js", "npm:3.16.1"],

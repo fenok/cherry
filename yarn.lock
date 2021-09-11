@@ -2388,6 +2388,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webpack-env@npm:^1.16.2":
+  version: 1.16.2
+  resolution: "@types/webpack-env@npm:1.16.2"
+  checksum: 122273f20e2bed6895aae2f03891f51ddacd826018e395d18aa5d833ad0462bb159637b83f8d202907234a6a48c66a8e4e9fdd703afc66f6afddb83eeac82b13
+  languageName: node
+  linkType: hard
+
 "@types/zen-observable@npm:*":
   version: 0.8.3
   resolution: "@types/zen-observable@npm:0.8.3"
@@ -5363,6 +5370,7 @@ __metadata:
     "@types/loadable__server": ^5.12.6
     "@types/react": ^17.0.19
     "@types/react-dom": ^17.0.9
+    "@types/webpack-env": ^1.16.2
     apollo: ^2.33.6
     babel-loader: ^8.2.2
     core-js: ^3.16.1

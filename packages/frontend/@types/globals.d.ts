@@ -7,6 +7,7 @@ declare global {
     /** Config */
     const __PUBLIC_CONFIG__: {
         readonly GRAPHQL_ENDPOINT: string;
+        readonly PUBLIC_PATH: string;
     };
 
     /** Dynamic server data */

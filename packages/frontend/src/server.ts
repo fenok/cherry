@@ -1,4 +1,5 @@
-import "./meta/server";
+import "./meta/config";
+import "./meta/publicPath";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import { createElement } from "react";
 import { ChunkExtractor } from "@loadable/server";
@@ -21,7 +22,7 @@ export interface RenderResult {
 
 export async function render({ stats }: RenderOptions): Promise<RenderResult> {
     const client = getApolloClient({ fetch });
-    const extractor = new ChunkExtractor({ stats, publicPath: "/" });
+    const extractor = new ChunkExtractor({ stats, publicPath: __PUBLIC_CONFIG__.PUBLIC_PATH });
 
     const app = extractor.collectChunks(createElement(App, { client }));
 

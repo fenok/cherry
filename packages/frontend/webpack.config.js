@@ -14,6 +14,7 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
         },
         output: {
             clean: isProductionBuild,
+            publicPath: "/static/",
         },
         stats: "errors-only",
         module: {
