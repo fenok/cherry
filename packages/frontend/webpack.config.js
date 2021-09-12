@@ -60,7 +60,7 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                     test: /\.svg$/,
                     oneOf: [
                         {
-                            dependency: { not: ["url"] },
+                            resourceQuery: /svgr/,
                             use: [
                                 {
                                     loader: "babel-loader",
@@ -75,13 +75,13 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                                         babel: false,
                                     },
                                 },
-                                "new-url-loader",
                             ],
                         },
                         {
                             type: "asset/resource",
                             generator: {
                                 emit: isClient,
+                                filename: isProductionBuild ? "[contenthash][ext]" : "[name].[contenthash][ext]",
                             },
                         },
                     ],
@@ -91,6 +91,7 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                     type: "asset/resource",
                     generator: {
                         emit: isClient,
+                        filename: isProductionBuild ? "[contenthash][ext]" : "[name].[contenthash][ext]",
                     },
                 },
             ],

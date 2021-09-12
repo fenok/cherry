@@ -9494,7 +9494,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graphql", "npm:15.5.3"],
             ["lint-staged", "npm:11.1.2"],
             ["mini-css-extract-plugin", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:2.2.2"],
-            ["new-url-loader", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:0.1.1"],
             ["open", "npm:8.2.1"],
             ["prettier", "npm:2.3.2"],
             ["react", "npm:17.0.2"],
@@ -12107,28 +12106,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/neo-async-npm-2.6.2-75d6902586-deac9f8d00.zip/node_modules/neo-async/",
           "packageDependencies": [
             ["neo-async", "npm:2.6.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["new-url-loader", [
-        ["npm:0.1.1", {
-          "packageLocation": "./.yarn/cache/new-url-loader-npm-0.1.1-fdc37490bf-8b060835c4.zip/node_modules/new-url-loader/",
-          "packageDependencies": [
-            ["new-url-loader", "npm:0.1.1"]
-          ],
-          "linkType": "SOFT",
-        }],
-        ["virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:0.1.1", {
-          "packageLocation": "./.yarn/__virtual__/new-url-loader-virtual-344cd24b66/0/cache/new-url-loader-npm-0.1.1-fdc37490bf-8b060835c4.zip/node_modules/new-url-loader/",
-          "packageDependencies": [
-            ["new-url-loader", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:0.1.1"],
-            ["@types/webpack", null],
-            ["webpack", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:5.50.0"]
-          ],
-          "packagePeers": [
-            "@types/webpack",
-            "webpack"
           ],
           "linkType": "HARD",
         }]

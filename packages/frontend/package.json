@@ -54,7 +54,6 @@
         "graphql": "^15.5.3",
         "lint-staged": "^11.1.2",
         "mini-css-extract-plugin": "^2.2.2",
-        "new-url-loader": "^0.1.1",
         "open": "^8.2.1",
         "prettier": "^2.3.2",
         "react": "^17.0.2",

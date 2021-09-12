@@ -3,8 +3,9 @@ import { styled } from "@linaria/react";
 import { useQuery } from "@apollo/client";
 import { ENTITY_QUERY } from "./graphql";
 import { GetEntity } from "./apollo-types/GetEntity";
-import tsLogoUrl, { ReactComponent as TsLogoSvg } from "./ts-logo.svg";
+import tsLogoUrl from "./ts-logo.svg";
 import serviceDogUrl from "./service-dog.png";
+import TsLogoSvg from "./ts-logo.svg?svgr";
 
 const Greeting: FC = () => {
     const { data } = useQuery<GetEntity>(ENTITY_QUERY);

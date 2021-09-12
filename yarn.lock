@@ -6123,7 +6123,6 @@ __metadata:
     graphql: ^15.5.3
     lint-staged: ^11.1.2
     mini-css-extract-plugin: ^2.2.2
-    new-url-loader: ^0.1.1
     open: ^8.2.1
     prettier: ^2.3.2
     react: ^17.0.2
@@ -8423,15 +8422,6 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
-  languageName: node
-  linkType: hard
-
-"new-url-loader@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "new-url-loader@npm:0.1.1"
-  peerDependencies:
-    webpack: ^5.0.0
-  checksum: 8b060835c49dfa8f8ec7c2319e453d99a4e5c25c9c5f6f69bea76c42e386f46ca0eab0e6e984bc8915b40078ae27775a66a3d76235ee80ac034db48af11a0ca2
   languageName: node
   linkType: hard
 

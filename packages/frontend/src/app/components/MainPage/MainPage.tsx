@@ -4,7 +4,7 @@ import { Button } from "../Button";
 import { styled } from "@linaria/react";
 
 const MainPage: FC = () => {
-    const [display, setDisplay] = useState(false);
+    const [display, setDisplay] = useState(true);
 
     return display ? <Greeting /> : <PositionedButton onClick={() => setDisplay(true)}>Greet</PositionedButton>;
 };
