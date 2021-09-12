@@ -80,12 +80,18 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                         },
                         {
                             type: "asset/resource",
+                            generator: {
+                                emit: isClient,
+                            },
                         },
                     ],
                 },
                 {
                     test: /\.(jpg|jpeg|png)$/,
                     type: "asset/resource",
+                    generator: {
+                        emit: isClient,
+                    },
                 },
             ],
         },
