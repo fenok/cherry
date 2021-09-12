@@ -15775,7 +15775,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["yarn", [
         ["npm:1.22.11", {
-          "packageLocation": "./.yarn/unplugged/yarn-npm-1.22.11-bc59c5b649/node_modules/yarn/",
+          "packageLocation": "./.yarn/cache/yarn-npm-1.22.11-bc59c5b649-315198d97a.zip/node_modules/yarn/",
           "packageDependencies": [
             ["yarn", "npm:1.22.11"]
           ],

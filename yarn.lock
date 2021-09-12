@@ -4463,6 +4463,8 @@ __metadata:
       built: false
     core-js-pure:
       built: false
+    yarn:
+      built: false
   languageName: unknown
   linkType: soft
 
