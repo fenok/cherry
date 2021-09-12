@@ -56,6 +56,37 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                         },
                     ],
                 },
+                {
+                    test: /\.svg$/,
+                    oneOf: [
+                        {
+                            dependency: { not: ["url"] },
+                            use: [
+                                {
+                                    loader: "babel-loader",
+                                    options: {
+                                        cacheDirectory: path.resolve(__dirname, ".cache", "babel-loader"),
+                                        caller: { browserslistEnv, isClient, isProductionBuild },
+                                    },
+                                },
+                                {
+                                    loader: "@svgr/webpack",
+                                    options: {
+                                        babel: false,
+                                    },
+                                },
+                                "new-url-loader",
+                            ],
+                        },
+                        {
+                            type: "asset/resource",
+                        },
+                    ],
+                },
+                {
+                    test: /\.(jpg|jpeg|png)$/,
+                    type: "asset/resource",
+                },
             ],
         },
         plugins: [
