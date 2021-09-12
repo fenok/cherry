@@ -4461,6 +4461,8 @@ __metadata:
   dependenciesMeta:
     core-js:
       built: false
+    core-js-pure:
+      built: false
   languageName: unknown
   linkType: soft
 
