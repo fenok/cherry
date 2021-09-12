@@ -46,7 +46,7 @@ const ServiceDogImage = styled.div`
     display: inline-block;
     width: 100px;
     height: 100px;
-    background: url("./service-dog.png");
+    background: url(${serviceDogUrl});
     background-size: contain;
 `;
 
