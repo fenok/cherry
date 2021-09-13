@@ -10430,7 +10430,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["webpack-cli", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:4.7.2"],
             ["webpack-dev-middleware", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:5.0.0"],
             ["webpack-hot-middleware", "npm:2.25.0"],
-            ["webpack-merge", "npm:5.8.0"]
+            ["webpack-merge", "npm:5.8.0"],
+            ["yargs", "npm:17.1.1"]
           ],
           "linkType": "SOFT",
         }]
@@ -18612,6 +18613,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yargs-npm-17.1.0-06b940cf1f-259d496db8.zip/node_modules/yargs/",
           "packageDependencies": [
             ["yargs", "npm:17.1.0"],
+            ["cliui", "npm:7.0.4"],
+            ["escalade", "npm:3.1.1"],
+            ["get-caller-file", "npm:2.0.5"],
+            ["require-directory", "npm:2.1.1"],
+            ["string-width", "npm:4.2.2"],
+            ["y18n", "npm:5.0.8"],
+            ["yargs-parser", "npm:20.2.9"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:17.1.1", {
+          "packageLocation": "./.yarn/cache/yargs-npm-17.1.1-484d22d0f7-b05a946793.zip/node_modules/yargs/",
+          "packageDependencies": [
+            ["yargs", "npm:17.1.1"],
             ["cliui", "npm:7.0.4"],
             ["escalade", "npm:3.1.1"],
             ["get-caller-file", "npm:2.0.5"],
