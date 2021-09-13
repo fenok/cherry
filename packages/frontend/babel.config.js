@@ -18,8 +18,10 @@ module.exports = (api) => {
             ["@babel/preset-react", { runtime: "automatic" }],
             "@linaria",
         ],
-        plugins: [isClient && !isProductionBuild ? "react-refresh/babel" : undefined, "@loadable/babel-plugin"].filter(
-            Boolean
-        ),
+        plugins: [
+            isClient && !isProductionBuild && "react-refresh/babel",
+            "@loadable/babel-plugin",
+            "graphql-tag",
+        ].filter(Boolean),
     };
 };

@@ -7116,6 +7116,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["babel-literal-to-ast", [
+        ["npm:2.1.0", {
+          "packageLocation": "./.yarn/cache/babel-literal-to-ast-npm-2.1.0-89f09750a3-19eccc9744.zip/node_modules/babel-literal-to-ast/",
+          "packageDependencies": [
+            ["babel-literal-to-ast", "npm:2.1.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:4f7b56f3b8d469c46a7ce6f1344153e8691fdc34669bb0c850df66bd90390b90b7bed9d60c32b9e9b5cc5213a2335be65b3a31eea30dad5e73b767f3a57bde44#npm:2.1.0", {
+          "packageLocation": "./.yarn/__virtual__/babel-literal-to-ast-virtual-72af4a1d52/0/cache/babel-literal-to-ast-npm-2.1.0-89f09750a3-19eccc9744.zip/node_modules/babel-literal-to-ast/",
+          "packageDependencies": [
+            ["babel-literal-to-ast", "virtual:4f7b56f3b8d469c46a7ce6f1344153e8691fdc34669bb0c850df66bd90390b90b7bed9d60c32b9e9b5cc5213a2335be65b3a31eea30dad5e73b767f3a57bde44#npm:2.1.0"],
+            ["@babel/core", "npm:7.15.0"],
+            ["@babel/parser", "npm:7.15.6"],
+            ["@babel/traverse", "npm:7.15.4"],
+            ["@babel/types", "npm:7.15.6"],
+            ["@types/babel__core", null]
+          ],
+          "packagePeers": [
+            "@babel/core",
+            "@types/babel__core"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["babel-loader", [
         ["npm:8.2.2", {
           "packageLocation": "./.yarn/cache/babel-loader-npm-8.2.2-b4e600c2c5-df5092ef98.zip/node_modules/babel-loader/",
@@ -7152,6 +7177,40 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["babel-plugin-dynamic-import-node", "npm:2.3.3"],
             ["object.assign", "npm:4.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["babel-plugin-graphql-tag", [
+        ["npm:3.3.0", {
+          "packageLocation": "./.yarn/cache/babel-plugin-graphql-tag-npm-3.3.0-cdcc08869d-6c1fd8ded2.zip/node_modules/babel-plugin-graphql-tag/",
+          "packageDependencies": [
+            ["babel-plugin-graphql-tag", "npm:3.3.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:3.3.0", {
+          "packageLocation": "./.yarn/__virtual__/babel-plugin-graphql-tag-virtual-4f7b56f3b8/0/cache/babel-plugin-graphql-tag-npm-3.3.0-cdcc08869d-6c1fd8ded2.zip/node_modules/babel-plugin-graphql-tag/",
+          "packageDependencies": [
+            ["babel-plugin-graphql-tag", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:3.3.0"],
+            ["@babel/core", "npm:7.15.0"],
+            ["@babel/helper-plugin-utils", "npm:7.14.5"],
+            ["@babel/parser", "npm:7.15.6"],
+            ["@types/babel__core", null],
+            ["@types/graphql", null],
+            ["@types/graphql-tag", null],
+            ["babel-literal-to-ast", "virtual:4f7b56f3b8d469c46a7ce6f1344153e8691fdc34669bb0c850df66bd90390b90b7bed9d60c32b9e9b5cc5213a2335be65b3a31eea30dad5e73b767f3a57bde44#npm:2.1.0"],
+            ["debug", "virtual:0199a45c671e3e6ab9ffc7957ed30e53ac25a36a557ba7669ce66f9554fecd13a162867a74f03a9ccb98e3f7ba409d1b93e612fd2fcd64bc9d4a1e12bb0c0d17#npm:4.3.2"],
+            ["graphql", "npm:15.5.3"],
+            ["graphql-tag", "virtual:cebe8a5d093405bc59b07df56d1f10fe730504f23ff85b06d079abfcc686ff1eddf030299bf0c19de225ca3ea7b9da04b4f0dc046c25a32d6ab82f6b897086b2#npm:2.12.5"]
+          ],
+          "packagePeers": [
+            "@babel/core",
+            "@types/babel__core",
+            "@types/graphql-tag",
+            "@types/graphql",
+            "graphql-tag",
+            "graphql"
           ],
           "linkType": "HARD",
         }]
@@ -10405,6 +10464,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/webpack-env", "npm:1.16.2"],
             ["apollo", "npm:2.33.6"],
             ["babel-loader", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:8.2.2"],
+            ["babel-plugin-graphql-tag", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:3.3.0"],
             ["core-js", "npm:3.16.1"],
             ["cross-fetch", "npm:3.1.4"],
             ["crypto-hash", "npm:1.3.0"],
@@ -10414,6 +10474,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.17.1"],
             ["get-port", "npm:5.1.1"],
             ["graphql", "npm:15.5.3"],
+            ["graphql-tag", "virtual:cebe8a5d093405bc59b07df56d1f10fe730504f23ff85b06d079abfcc686ff1eddf030299bf0c19de225ca3ea7b9da04b4f0dc046c25a32d6ab82f6b897086b2#npm:2.12.5"],
             ["image-webpack-loader", "npm:7.0.1"],
             ["lint-staged", "npm:11.1.2"],
             ["mini-css-extract-plugin", "virtual:a315446cd0626d69c81bb371962241fad2e843699b8251d1a49a3231d7821af7bdb2285677102303361c3219ca15ceeabaa438b7b5ead02c2587180fe2eace6b#npm:2.2.2"],
