@@ -81,7 +81,9 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                             type: "asset/resource",
                             generator: {
                                 emit: isClient,
-                                filename: isProductionBuild ? "[contenthash][ext]" : "[name].[contenthash][ext]",
+                                filename: isProductionBuild
+                                    ? "images/[contenthash][ext]"
+                                    : "images/[name].[contenthash][ext]",
                             },
                         },
                     ],
@@ -91,7 +93,7 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                     type: "asset/resource",
                     generator: {
                         emit: isClient,
-                        filename: isProductionBuild ? "[contenthash][ext]" : "[name].[contenthash][ext]",
+                        filename: isProductionBuild ? "images/[contenthash][ext]" : "images/[name].[contenthash][ext]",
                     },
                 },
             ],
@@ -102,7 +104,7 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                 SSR_MODE: JSON.stringify(!isClient),
             }),
             new MiniCssExtractPlugin({
-                filename: isProductionBuild ? "[contenthash].css" : "[name].css",
+                filename: isProductionBuild ? "styles/[contenthash].css" : "styles/[name].css",
             }),
             !isProductionBuild &&
                 new webpack.SourceMapDevToolPlugin({
@@ -121,7 +123,7 @@ function client({ browserslistEnv, isProductionBuild }) {
             "./src/client",
         ].filter(Boolean),
         output: {
-            filename: isProductionBuild ? "[contenthash].js" : "[name].js",
+            filename: isProductionBuild ? "scripts/[contenthash].js" : "scripts/[name].js",
             path: path.resolve(__dirname, "dist", "client"),
         },
         plugins: [
