@@ -76,10 +76,8 @@ function common({ browserslistEnv, isProductionBuild, isClient }) {
                                         svgo: false,
                                     },
                                 },
-                                {
-                                    loader: "svgo-loader",
-                                },
-                            ],
+                                isProductionBuild && "svgo-loader",
+                            ].filter(Boolean),
                         },
                         {
                             type: "asset/resource",
@@ -89,11 +87,7 @@ function common({ browserslistEnv, isProductionBuild, isClient }) {
                                     ? "images/[contenthash][ext]"
                                     : "images/[name].[contenthash][ext]",
                             },
-                            use: [
-                                {
-                                    loader: "svgo-loader",
-                                },
-                            ],
+                            use: isProductionBuild && "svgo-loader",
                         },
                     ],
                 },
