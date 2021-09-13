@@ -8,7 +8,7 @@ const { merge } = require("webpack-merge");
 function common({ browserslistEnv, isProductionBuild }, isClient) {
     return {
         mode: isProductionBuild ? "production" : "development",
-        devtool: isProductionBuild ? false : "eval-source-map",
+        devtool: isProductionBuild ? false : "cheap-module-source-map",
         resolve: {
             extensions: [".js", ".ts", ".tsx"],
         },
