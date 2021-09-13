@@ -99,6 +99,12 @@ function common({ browserslistEnv, isProductionBuild, isClient }) {
                         emit: isClient,
                         filename: isProductionBuild ? "images/[contenthash][ext]" : "images/[name].[contenthash][ext]",
                     },
+                    use: {
+                        loader: "image-webpack-loader",
+                        options: {
+                            disable: !isProductionBuild,
+                        },
+                    },
                 },
             ],
         },
