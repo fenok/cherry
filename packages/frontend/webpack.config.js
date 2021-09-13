@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const { merge } = require("webpack-merge");
@@ -114,6 +115,9 @@ function common({ browserslistEnv, isProductionBuild, isClient }) {
                     test: /\.css$/,
                 }),
         ].filter(Boolean),
+        optimization: {
+            minimizer: [`...`, new CssMinimizerPlugin()],
+        },
     };
 }
 
