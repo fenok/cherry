@@ -73,7 +73,11 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                                     loader: "@svgr/webpack",
                                     options: {
                                         babel: false,
+                                        svgo: false,
                                     },
+                                },
+                                {
+                                    loader: "svgo-loader",
                                 },
                             ],
                         },
@@ -85,6 +89,11 @@ function common({ browserslistEnv, isProductionBuild }, isClient) {
                                     ? "images/[contenthash][ext]"
                                     : "images/[name].[contenthash][ext]",
                             },
+                            use: [
+                                {
+                                    loader: "svgo-loader",
+                                },
+                            ],
                         },
                     ],
                 },

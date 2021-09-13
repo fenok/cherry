@@ -11,18 +11,16 @@ const Greeting: FC = () => {
     const { data } = useQuery<GetEntity>(ENTITY_QUERY);
 
     return (
-        <FancySpan>
-            Hello, {data?.entity.name}!
+        <>
+            <FancySpan>Hello, {data?.entity.name}!</FancySpan>
             <ImagesContainer>
-                <ServiceDogImage />
-                <TsBackgroundSvg />
-                <TsLogoSvg />
+                <ServiceDogBackgroundImage />
+                <TsLogoBackgroundImage />
+                <TsLogoSvg width={100} height={100} />
+                <Image src={tsLogoUrl} />
+                <Image src={serviceDogUrl} />
             </ImagesContainer>
-            <LinksContainer>
-                <a href={tsLogoUrl}>{tsLogoUrl}</a>
-                <a href={serviceDogUrl}>{serviceDogUrl}</a>
-            </LinksContainer>
-        </FancySpan>
+        </>
     );
 };
 
@@ -31,19 +29,19 @@ const ImagesContainer = styled.div`
     align-items: flex-start;
 `;
 
-const LinksContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+const Image = styled.img`
+    width: 100px;
+    height: 100px;
 `;
 
-const TsBackgroundSvg = styled.div`
+const TsLogoBackgroundImage = styled.div`
     display: inline-block;
     width: 100px;
     height: 100px;
     background-image: url("./ts-logo.svg");
     background-size: contain;
 `;
-const ServiceDogImage = styled.div`
+const ServiceDogBackgroundImage = styled.div`
     display: inline-block;
     width: 100px;
     height: 100px;
