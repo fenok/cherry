@@ -5,7 +5,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const { merge } = require("webpack-merge");
 
-function common({ browserslistEnv, isProductionBuild }, isClient) {
+function common({ browserslistEnv, isProductionBuild, isClient }) {
     return {
         mode: isProductionBuild ? "production" : "development",
         devtool: isProductionBuild ? false : "cheap-module-source-map",
@@ -180,14 +180,11 @@ function server({ browserslistEnv }) {
 
 module.exports = (env = {}) => {
     const isProductionBuild = env.production;
-    const clientConfig = { browserslistEnv: "client", isProductionBuild };
-    const serverConfig = { browserslistEnv: "server", isProductionBuild };
+    const clientConfig = { browserslistEnv: "client", isProductionBuild, isClient: true };
+    const serverConfig = { browserslistEnv: "server", isProductionBuild, isClient: false };
 
     // We don't rely on it, but set it anyway for tools which might depend on it.
     process.env.NODE_ENV = isProductionBuild ? "production" : "development";
 
-    return [
-        merge(common(clientConfig, true), client(clientConfig)),
-        merge(common(serverConfig, false), server(serverConfig)),
-    ];
+    return [merge(common(clientConfig), client(clientConfig)), merge(common(serverConfig), server(serverConfig))];
 };
